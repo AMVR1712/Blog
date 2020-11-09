@@ -4,10 +4,14 @@ function login(){
     u = $("#user").val();
     p = document.getElementById("pass").value;
 
-    if(u == "admin" & p == "123"){
-        location.href="inicio.html";
-    }else{
-        $("#msgLogin").fadeIn(1000);
-        $("#msgLogin").html("Error de usuario/contraseña");
-    }
+    $.getJSON("Login.php",{user:u,pass:p}).done(function(datos){
+        console.log(datos);
+        if(datos.resp=="Si"){
+            location.href="Inicio.php";
+        }else{
+            $("#msgLogin").fadeIn(1000);
+            $("#msgLogin").html("Error de usuario/contraseña");
+        }
+    });
+    
 }

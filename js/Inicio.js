@@ -4,17 +4,26 @@ temas = [{id:'1',tema:'Programacion'},
 temasId = 2;
 idaeliminar = 0;
 idaeditar = 0;
-
-actualizar();
+consulta();
+//actualizar();
 console.log(temas);
 
 function agregarTema(){
     let tema = $("#tema").val();
+    $.getJSON("Add_Temas.php", {nombre:tema}).done(function(Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+
+        }
+    });
+
+    /*let tema = $("#tema").val();
     temasId ++;
     nuevoTema = {'id':temasId+"",'tema':tema};
     temas.push(nuevoTema);
     console.log(temas);
-    actualizar();
+    actualizar();*/
 }
 
 function actualizar(){
@@ -46,21 +55,48 @@ function eliminarTema(idtema){
 }
 
 function confirmaEliminar(){
-    for(let i = 0 ; i < temas.length; i++){
+    $.GetJSON("Del_Temas.php", {id:idaeliminar}).done(function (Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+
+        }
+    });
+
+    /*for(let i = 0 ; i < temas.length; i++){
         if(temas[i].id==idaeliminar){
             temas.splice(i,1);
             break;
         }
     }
-    actualizar();
+    actualizar();*/
 }
 
 function guardaCambios(){
-    for(let i = 0 ; i < temas.length; i++){
+    $.GetJSON("Mod_Temas.php", {id:idaeditar, nombre:nom}).done(function (Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+            alert("No hay cambios");
+        }
+    });
+
+    /*for(let i = 0 ; i < temas.length; i++){
         if(temas[i].id==idaeditar){
             temas[i].tema = $("#temaEditar").val();
             break;
         }
     }
-    actualizar();
+    actualizar();*/
+}
+
+
+/* Conexión a Base de Datos */
+/* Consulta */
+
+function consulta(){
+    $.GetJSON("Con_Temas.php").done(function (Datos){
+        temas = Datos;
+        actualizar();
+    }).fail
 }

@@ -1,3 +1,6 @@
+<?php
+require_once 'Seguridad.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,41 +23,47 @@
 
         <div class="collapse navbar-collapse" id="menuPrincipal">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="Inicio.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="Inicio.php">Inicio</a></li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="Mensajes.html">Mensajes</a></li>
+                <li class="nav-item"><a class="nav-link" href="Mensajes.php">Mensajes</a></li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="Usuarios.html">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="Usuarios.php">Usuarios</a></li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="Index.html">Salir</a></li>
             </ul>
         </div>
     </nav>
+<<<<<<< HEAD
+=======
 
+>>>>>>> parent of 37bd05e... Sí
     <div class="container">
+        <div class="row">
+            <div class="col"><span>Tema:</span><span id="nombreTema">Programacion</span></div>
+        </div>
         <div class="row">
             <div class="col"></div>
             <div class="col">
                 <div class="card mt-5">
                     <div class="card-header colorFondo colorTexto">
-                        Agregar tema
+                        Agregar mensaje
                     </div>
                     <div class="card-body">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    Tema:
+                                    Mensaje:
                                 </div>
                             </div>
-                            <input type="text" name="tema" id="tema" 
-                            class="form-control" placeholder="Nombre de tema">
+                            <input type="text" name="mensaje" id="mensaje" 
+                            class="form-control" placeholder="Escribe tu mensaje">
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="btn btn-primary" onclick="agregarTema()">
+                        <button class="btn btn-primary" onclick="agregarMensaje()">
                             <i class="material-icons align-middle">add_circle</i>
                         </button>
                     </div>
@@ -69,6 +78,9 @@
                         <tr>
                             <th>Id</th>
                             <th>Tema</th>
+                            <th>Mensaje</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
                             <th>...</th>
                         </tr>
                     </thead>
@@ -76,23 +88,14 @@
                         <tr>
                             <td>1</td>
                             <td>Programacion</td>
+                            <td>Hola</td>
+                            <td>Admin</td>
+                            <td>2020-09-28</td>
                             <td>
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#modificaTema">
                                     <i class="material-icons align-middle">edit</i>
                                 </button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#eliminaTema">
-                                    <i class="material-icons align-middle">cancel</i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Matematicas</td>
-                            <td>
-                                <button class="btn btn-primary">
-                                    <i class="material-icons align-middle">edit</i>
-                                </button>
-                                <button class="btn btn-danger">
                                     <i class="material-icons align-middle">cancel</i>
                                 </button>
                             </td>
@@ -107,7 +110,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Editar Tema</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Editar Mensaje</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -116,10 +119,10 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            Tema:
+                            Mensaje:
                         </div>
                     </div>
-                    <input type="text" name="temaEditar" id="temaEditar" 
+                    <input type="text" name="msgEditar" id="msgEditar" 
                     class="form-control" placeholder="Nombre de tema">
                 </div>
             </div>
@@ -136,13 +139,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Eliminar Tema</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Mensaje</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <p>¿esta seguro de elimanr el tema? Se eliminaran todos los mensajes relacionados.</p>
+            <p>¿esta seguro de elimanr el mensaje?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -164,6 +167,6 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/Inicio.js"></script>
+    <script src="js/Mensajes.js"></script>
 </body>
 </html>
