@@ -4,7 +4,7 @@ require_once 'Conexion.php';
 
 $con = Conexion();
 $id = $_REQUEST["id"];
-$con->prepare("DELETE FROM temas WHERE IDtEMA=:id");
+$con->prepare("DELETE FROM temas WHERE idTema=:id");
 $cmd->bindValue(':id',$id);
 $cmd->execute();
 if($cmd->rowCount > 0)

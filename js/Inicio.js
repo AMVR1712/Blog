@@ -14,7 +14,7 @@ function agregarTema(){
         if(Datos.resp == "Si"){
             consulta();
         }else{
-
+            $('.toast').toast('show');
         }
     });
 
@@ -29,7 +29,7 @@ function agregarTema(){
 function actualizar(){
     $("#tablaTemas").html('');
     for(let i = 0 ; i < temas.length; i++){
-        let fila = "<tr><td>" + temas[i].id + "</td><td>" + temas[i].tema + "</td>";
+        let fila = "<tr><td>" + temas[i].id + "</td><td><a onclick=ver ("+ temas[i] + ", \'"+ temas[i].id + ")'>" + temas[i].tema + "</td>";
         fila = fila + "<td><button onclick='editarTema("+ temas[i].id +");' class='btn btn-primary' data-toggle='modal' data-target='#modificaTema'>";
         fila += "<i class='material-icons align-middle'>edit</i></button>";
         fila += "<button onclick='eliminarTema("+ temas[i].id +");' class='btn btn-danger' data-toggle='modal' data-target='#eliminaTema'>";
@@ -98,5 +98,13 @@ function consulta(){
     $.GetJSON("Con_Temas.php").done(function (Datos){
         temas = Datos;
         actualizar();
-    }).fail
+    }).fail(function(e){
+        console.log(e);
+    });
+}
+
+function ver(Tema){
+    sessionStorage.setItem("idtema", tema.id);
+    sessionStorage.setItem("tema", tema.tema);
+    location.href="Mensajes.php";
 }

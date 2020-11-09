@@ -8,16 +8,20 @@ idaeditar = 0;
 actualizar();
 console.log(mensajes);
 
-$("#nombreTema").text('Progra');
+$("#nombreTema").text(sessionStorage.getItem('tema'));
 
 function agregarMensaje(){
-    let msg = $("#mensaje").val();
-    msgId ++;
-    nuevoMsg = {id: msgId, tema:'Programacion', mensaje: msg, usuario:'juan', fecha:'2020-09-28'};
-    mensajes.push(nuevoMsg);
-    console.log(mensajes);
-    actualizar();
-}
+    let id=sessionStorage.getItem("idtema");
+    let msg= $("#mensaje").val();
+    $.getJSON("CRUD_mensajes.php", {operacion: 'C', idtema:id, mensaje:msg}).done(function(Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+            $('.toast').toast('show');
+        }
+    }).fail(function(e){
+        console.log(e)
+    });
 
 function actualizar(){
     $("#tablaTemas").html('');
@@ -48,21 +52,51 @@ function eliminarMsg(id){
 }
 
 function confirmaEliminar(){
-    for(let i = 0 ; i < mensajes.length; i++){
+    let msg=$("$msgEditar").val();
+    $.GetJSON("CRUD_mensajes.php", {operacion:'D', idmsg:idaeditar, mensaje:msg}).done(function (Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+            $('.toast').toast('show')
+        }
+    }).fail(function(e){
+        console.log(e)
+    });
+    /*for(let i = 0 ; i < mensajes.length; i++){
         if(mensajes[i].id==idaeliminar){
             mensajes.splice(i,1);
             break;
         }
     }
-    actualizar();
+    actualizar();*/
 }
 
 function guardaCambios(){
-    for(let i = 0 ; i < mensajes.length; i++){
+    let msg=$("$msgEditar").val();
+    $.GetJSON("CRUD_mensajes.php", {operacion:'U', idmsg:idaeditar, mensaje:msg}).done(function (Datos){
+        if(Datos.resp == "Si"){
+            consulta();
+        }else{
+            $('.toast').toast('show')
+        }
+    }).fail(function(e){
+        console.log(e)
+    });
+    /*for(let i = 0 ; i < mensajes.length; i++){
         if(mensajes[i].id==idaeditar){
             mensajes[i].mensaje = $("#msgEditar").val();
             break;
         }
     }
-    actualizar();
+    actualizar();*/
+}
+
+function consulta(){
+    let id=sessionStorage.getItem("idtema")
+    $.GetJSON("CRUD_mensajes.php").done(function (Datos){
+        temas = Datos;
+        actualizar();
+    }).fail(function(e){
+        console.log(e)
+    });
 }
