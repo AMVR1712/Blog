@@ -11,7 +11,7 @@ function Conexion () {
         $c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $c;
     }catch(PDOException $e){
-        exit("$e->getMessage()");
+        exit($e->getMessage());
     }
     
 }
