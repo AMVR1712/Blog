@@ -2,6 +2,8 @@
 //require_once 'Seguridad.php';
 require_once 'Conexion.php';
 
+$op = $_GET['operacion'];
+
 $con = Conexion();
 
 switch{
@@ -15,13 +17,13 @@ switch{
     $cmd->bindValue(':m',$mensaje);
     $cmd->execute();
     if($cmd->rowCount > 0)
-    echo json_encode(["resp"=>"Si"]);
+    echo json_encode(["resp"=>"Si", "id"=>$id]);
     else
     echo json_encode(["resp"=>"No"]);
 break;
     case "R";
     $idtema = $_GET['idtema'];
-    $con->prepare("SELECT idmsg AS is, idtema AS tema, mensahe, user AS user, fecha AS fecha FROM mensajes WHERE idtema=:id");
+    $cmd = $con->prepare("SELECT idmsg AS is, idtema AS tema, mensahe, user AS user, fecha AS fecha FROM mensajes WHERE idtema=:id");
     $cmd->bindValue(':id',$idtema);
     $cmd->setFetchMode(PDD::FETCH_ASSOC);
     $cmd->execute();
@@ -36,7 +38,7 @@ break;
     $cmd->bindValue(':id',$id);
     $cmd->execute();
     if($cmd->rowCount > 0)
-    echo json_encode(["resp"=>"Si"]);
+    echo json_encode(["resp"=>"Si", "id"=>$id]);
     else
     echo json_encode(["resp"=>"No"]);
 break;
@@ -46,7 +48,7 @@ break;
     $cmd->bindValue(':id',$id);
     $cmd->execute();
     if($cmd->rowCount > 0)
-    echo json_encode(["resp"=>"Si"]);
+    echo json_encode(["resp"=>"Si", "id"=>$id]);
     else
     echo json_encode(["resp"=>"No"]);
 break;
