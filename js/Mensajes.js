@@ -17,7 +17,7 @@ function agregarMensaje(){
         if(datos.resp=="si"){
             consulta();
         }else{
-            //error
+            alert ("Error");
         }
     }).fail(function(){
         
@@ -64,7 +64,7 @@ function confirmaEliminar(){
         if(datos.resp=="si"){
             consulta();
         }else{
-            //error
+            alert ("Error");
         }
     });
     /*for(let i = 0 ; i < mensajes.length; i++){
@@ -82,7 +82,7 @@ function guardaCambios(){
         if(datos.resp=="si"){
             consulta();
         }else{
-            //error
+            alert ("Error");
         }
     });
     /*for(let i = 0 ; i < mensajes.length; i++){

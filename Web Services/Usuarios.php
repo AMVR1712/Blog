@@ -13,7 +13,7 @@ $op = $_SERVER['REQUEST_METHOD'];
 $con = Conexion();
 
 switch($op){
-    case "Post":
+    case "POST":
         //Código para la alta, CREATE.
         if(isset($_GET['user']) && isset($_GET['pass']) && isset($_GET['tipo']) && isset($_GET['nombre'])){
         $u = $_POST['user'];
@@ -61,10 +61,10 @@ switch($op){
             $t = $_GET['tipo'];
             $n = $_GET['nombre'];
             $con->prepare("UPDATE usuarios SET pass=:p, tipo=:t, nombre=:n WHERE user=:u");
-            $cmd->bindValue(':u',$u);
-            $cmd->bindValue(':p',$p);
-            $cmd->bindValue(':t',$t);
-            $cmd->bindValue(':n',$n);
+            $cmd->bindValue(':user',$u);
+            $cmd->bindValue(':pass',$p);
+            $cmd->bindValue(':tipo',$t);
+            $cmd->bindValue(':nombre',$n);
             $cmd->execute();
     
             header("HTTP/1.1 200 OK");
@@ -80,11 +80,8 @@ switch($op){
         //Código para la eliminación DELETE.
         if(isset($_GET['user'])){
             $u = $_GET['user'];
-            $p = $_GET['pass'];
-            $t = $_GET['tipo'];
-            $n = $_GET['nombre'];
             $con->prepare("DELETE FROM usuarios WHERE user=:u");
-            $cmd->bindValue(':u',$u);
+            $cmd->bindValue(':user',$u);
             $cmd->execute();
     
             header("HTTP/1.1 200 OK");

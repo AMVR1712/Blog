@@ -8,14 +8,24 @@ idaeditar = 0;
 actualizar();
 console.log(usuarios);
 
-function agregarNick(){
-    let nickU = $("#nick").val();
-    let passw = $("#pass").val();
-    userid ++;
-    nuevoUser = {id: userid, nick: nickU, pass: passw, activo:'No', fecha:'2020-09-28'};
-    usuarios.push(nuevoUser);
-    console.log(usuarios);
-    actualizar();
+function agregarMensaje(){
+    let id=sessionStorage.getItem("idtema");
+    let user = $("#tablaUsers").val();
+    $.getJSON("/Web Services/Ususarios.php",{operacion:'POST',userid:id,usuarios:user}).done(function(datos){
+        if(datos.resp=="si"){
+            consulta();
+        }else{
+            alert ("Error");
+        }
+    }).fail(function(){
+        
+    });
+    /*let msg = $("#mensaje").val();
+    msgId ++;
+    nuevoMsg = {id: msgId,tema:'Programacion', mensaje: msg, usuario:'juan', fecha:'2020-09-28'};
+    mensajes.push(nuevoMsg);
+    console.log(mensajes);
+    actualizar();*/
 }
 
 function actualizar(){
@@ -57,22 +67,47 @@ function eliminarUser(id){
 }
 
 function confirmaEliminar(){
-    for(let i = 0 ; i < usuarios.length; i++){
-        if(usuarios[i].id==idaeliminar){
-            usuarios.splice(i,1);
+    user=$("#eliminaUser").val();
+    $.getJSON("/Web Services/Usuarios.php",{operacion:'DELETE',idmsg:idaeliminar}).done(function(datos){
+        if(datos.resp=="si"){
+            consulta();
+        }else{
+            alert ("Error");
+        }
+    });
+    /*for(let i = 0 ; i < mensajes.length; i++){
+        if(mensajes[i].id==idaeliminar){
+            mensajes.splice(i,1);
             break;
         }
     }
-    actualizar();
+    actualizar();*/
 }
 
 function guardaCambios(){
-    for(let i = 0 ; i < usuarios.length; i++){
-        if(usuarios[i].id==idaeditar){
-            usuarios[i].nick = $("#userEditar").val();
-            usuarios[i].pass = $("#passEditar").val();
+    user=$("#userEditar").val();
+    $.getJSON("/Web Services/Usuarios.php",{operacion:'PUT',userid:idaeditar,usuarios:user}).done(function(datos){
+        if(datos.resp=="si"){
+            consulta();
+        }else{
+            alert ("Error");
+        }
+    });
+    /*for(let i = 0 ; i < mensajes.length; i++){
+        if(mensajes[i].id==idaeditar){
+            mensajes[i].mensaje = $("#msgEditar").val();
             break;
         }
     }
-    actualizar();
+    actualizar();*/
+}
+
+function consulta(){
+    let id=sessionStorage.getItem("userid");
+    $.getJSON("Web Services/Ususarios.php",{operacion:'GET', userid: id}).done(function(datos){
+        mensajes=datos;
+        actualizar();
+    }).fail(function(){
+        
+    });
 }
