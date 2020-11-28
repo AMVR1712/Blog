@@ -145,7 +145,7 @@ require_once 'Seguridad.php';
           </button>
         </div>
         <div class="modal-body">
-            <p>¿esta seguro de elimanr el mensaje?</p>
+            <p>¿Esta seguro de eliminar el mensaje?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>

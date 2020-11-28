@@ -22,6 +22,7 @@ $consulta = $comando->fetch();
 if($consulta){
     $_SESSION["login"] = "Si";
     $_SESSION["login"] = $consulta["nombre"];
+    $_SESSION["user"] = $consulta["user"];
     echo json_encode(["resp"=>"Si"]);
 }else{
     echo json_encode(["resp"=>"No"]);
